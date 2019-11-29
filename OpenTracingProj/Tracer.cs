@@ -21,7 +21,7 @@ namespace OpenTracingProj
 
          _inMemoryReporter = new InMemoryReporter();
 
-         _tracer = new JaegerTracer.Builder("Proscheduler")
+         _tracer = new JaegerTracer.Builder("ProScheduler")
             .WithReporter(_inMemoryReporter)
             .WithSampler(new ConstSampler(true))
             .Build();
@@ -29,7 +29,7 @@ namespace OpenTracingProj
          GlobalTracer.Register(_tracer);
       }
 
-      public static ITracer Instance { get { return _tracer; } }
+      public static ITracer Instance => _tracer;
 
       public static IReadOnlyList<Span> GetInMemorySpans() //also we can clear in memory list
       {

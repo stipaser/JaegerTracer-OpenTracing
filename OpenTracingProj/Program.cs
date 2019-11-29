@@ -7,9 +7,9 @@ namespace OpenTracingProj
    {
       static void Main(string[] args)
       {
-         Tracer.ConfigureTracer();
+         Tracer.ConfigureTracer(); // once in program
 
-         IScope scope = Tracer.Instance.BuildSpan("Main").WithTag("skills", "23").StartActive(true);
+         IScope scope = Tracer.Instance.BuildSpan("method_1").WithTag("skills", 23).StartActive(true);
          SomeMethod1();
          Tracer.Instance.ScopeManager.Active?.Dispose();
 
@@ -19,7 +19,7 @@ namespace OpenTracingProj
 
       static void SomeMethod1()
       {
-         using(IScope scop = Tracer.Instance.BuildSpan("method22222").StartActive(true))
+         using(IScope scop = Tracer.Instance.BuildSpan("method_2").WithTag("employees", 25).StartActive(true))
          {
             Thread.Sleep(2000);
             SomeMethod2();

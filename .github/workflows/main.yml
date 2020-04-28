@@ -27,7 +27,7 @@ jobs:
         # Folder location of where vswhere.exe is located if a self-hosted agent
         #vswhere-path: # optional
         # Version of Visual Studio to search; defaults to latest if not specified
-        vs-version: 14.0
+        vs-version: 2017
     
     - name: msbuild version
       run: msbuild -version

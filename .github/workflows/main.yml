@@ -10,27 +10,36 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build:    
     runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2 
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
+    - uses: actions/checkout@v2      
+        
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
     
-    - name: Display git branch
-      run: git branch 
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+      
+    - name: Restore NuGet Packages
+      run: nuget restore OpenTracingProj.sln
+    
+    - name: Build and Publish Project
+      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    
+    #- name: Display git branch
+    #  run: git branch
     
     - name: Display content directory
-      run: dir
-
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Test branch!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      run: dir 
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: published_app
+        # Directory containing files to upload
+        path: bin\Release\Publish

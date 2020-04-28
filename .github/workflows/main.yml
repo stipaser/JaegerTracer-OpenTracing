@@ -21,6 +21,9 @@ jobs:
     
     - name: Display git branch
       run: git branch 
+    
+    - name: Display content directory
+      run: dir
 
     # Runs a single command using the runners shell
     - name: Run a one-line script

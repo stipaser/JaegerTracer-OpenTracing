@@ -42,4 +42,4 @@ jobs:
         # Artifact name
         name: published_app
         # Directory containing files to upload
-        path: bin\Release\Publish
+        path: bin\Release

@@ -18,8 +18,16 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
     - uses: actions/checkout@v2      
         
-    - name: Setup MSBuild.exe
-      uses: warrenbuckley/Setup-MSBuild@v1
+    #- name: Setup MSBuild.exe
+    #  uses: warrenbuckley/Setup-MSBuild@v1
+    
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+      with:
+        # Folder location of where vswhere.exe is located if a self-hosted agent
+        #vswhere-path: # optional
+        # Version of Visual Studio to search; defaults to latest if not specified
+        vs-version: 14.0
     
     - name: msbuild version
       run: msbuild -version

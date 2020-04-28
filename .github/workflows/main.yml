@@ -20,24 +20,27 @@ jobs:
         
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
+      
+    - name: setup-sqlpackage
+      uses: coreywebber/setup-sqlpackage@v1.0.0
         
-    - name: msbuild version
-      run: msbuild -version
+    #- name: msbuild version
+    #  run: msbuild -version
       
-    - name: GITHUB_WORKSPACE
-      run: echo $Env:GITHUB_WORKSPACE
+    #- name: GITHUB_WORKSPACE
+    #  run: echo $Env:GITHUB_WORKSPACE
     
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+    #- name: Setup Nuget.exe
+    #  uses: warrenbuckley/Setup-Nuget@v1
       
-    - name: Restore NuGet Packages
-      run: nuget restore OpenTracingProj.sln
+    #- name: Restore NuGet Packages
+    #  run: nuget restore OpenTracingProj.sln
     
-    - name: Build and Publish Project
-      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    #- name: Build and Publish Project
+    #  run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
           
-    - name: Display content directory
-      run: dir 
+    #- name: Display content directory
+    #  run: dir 
     
     #- name: Upload artifact
     #  uses: actions/upload-artifact@v1.0.0

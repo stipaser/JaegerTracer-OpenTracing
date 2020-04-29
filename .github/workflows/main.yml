@@ -25,7 +25,7 @@ jobs:
       run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     
     - name: display sqlpackage version
-      run: sqlpackage
+      run: $env:Path
         
     #- name: msbuild version
     #  run: msbuild -version

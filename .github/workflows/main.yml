@@ -23,15 +23,17 @@ jobs:
       
     - name: setup-sqlpackage
       uses: coreywebber/setup-sqlpackage@v1.0.0
+      with:
+        sql-version: 13
     
-    - name: display sqlpackage version
-      run: sqlpackage -version
+    #- name: display sqlpackage version
+    # run: sqlpackage -version
         
     #- name: msbuild version
     #  run: msbuild -version
       
-    #- name: GITHUB_WORKSPACE
-    #  run: echo $Env:GITHUB_WORKSPACE
+    - name: GITHUB_WORKSPACE
+      run: echo $Env:GITHUB_WORKSPACE
     
     #- name: Setup Nuget.exe
     #  uses: warrenbuckley/Setup-Nuget@v1

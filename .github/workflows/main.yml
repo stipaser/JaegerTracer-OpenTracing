@@ -21,13 +21,11 @@ jobs:
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
       
-    - name: setup-sqlpackage
-      uses: coreywebber/setup-sqlpackage@v1.0.0
-      with:
-        sql-version: 13
+    - name: setup-sqlpackage path
+      run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     
-    #- name: display sqlpackage version
-    # run: sqlpackage -version
+    - name: display sqlpackage version
+      run: sqlpackage
         
     #- name: msbuild version
     #  run: msbuild -version

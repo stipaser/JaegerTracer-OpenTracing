@@ -28,7 +28,8 @@ jobs:
     
     - name: switch docker
       run: |
-        'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
+         dir 'C:\Program Files\Docker\Docker\D*Cli.exe'
+         #C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
     
     
     - name: docker run

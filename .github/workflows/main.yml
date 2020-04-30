@@ -24,8 +24,11 @@ jobs:
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     
-    - name: display docker -v
-      run: docker -v
+    - name: docker run
+      run: docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=45setkbv3!@Dw' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+
+    - name: docker ps
+      run: docker ps
         
     #- name: msbuild version
     #  run: msbuild -version

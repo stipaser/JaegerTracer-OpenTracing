@@ -23,9 +23,10 @@ jobs:
       
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
-    - name: where docker
-      run: where docker
-      shell: cmd
+    # C:\Program Files\Docker
+    - name: dir docker 
+      run: dir 'C:\Program Files\Docker'
+      
     
     - name: switch docker
       run: |

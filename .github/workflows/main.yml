@@ -26,8 +26,8 @@ jobs:
     
     - name: switch docker
       run: | 
-        cd 'C:\Program Files\Docker\Docker\'
-        DockerCli.exe -SwitchDaemon
+        & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
+        docker version
       
     - name: docker run
       run: docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=45setkbv3!@Dw' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest

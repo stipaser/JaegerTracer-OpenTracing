@@ -25,7 +25,7 @@ jobs:
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     
     - name: docker run
-      run: docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=45setkbv3!@Dw' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+      run: docker run -d -p 1433:1433 -e sa_password=45setkbv3!@Dw -e ACCEPT_EULA=Y microsoft/mssql-server-windows-developer
 
     - name: docker ps
       run: docker ps

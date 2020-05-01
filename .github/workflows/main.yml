@@ -43,7 +43,7 @@ jobs:
     - name: try publish dacpac
       run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
       shell: cmd   
-    
+
     - name: Setup Nunit console
       run: choco install nunit-console-runner
        
@@ -84,3 +84,8 @@ jobs:
     #  with:        
     #    name: published_app        
     #    path: OpenTracingProj\bin\Release
+  test:
+    runs-on: windows-2019
+    steps:
+     - name: setup test
+       run: abfg

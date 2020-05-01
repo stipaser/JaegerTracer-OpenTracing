@@ -25,7 +25,9 @@ jobs:
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     # C:\Program Files\Docker
     - name: dir docker 
-      run: gci 'C:\Program Files\' -recurse -include 'dockercli.exe'
+      run: |
+       gci 'C:\Program Files\' -recurse -include 'dockercli.exe'
+       wdwdbkw
       
     
     - name: switch docker

@@ -14,8 +14,7 @@ jobs:
     runs-on: windows-latest
     
     env:
-      SQLPACKAGE_PATH: |
-       "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"
+      SQLPACKAGE_PATH: &"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,21 +28,19 @@ jobs:
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     # C:\Program Files\Docker
     
-    - name: display sqlpackage
-      run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
+    #- name: display sqlpackage
+    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
       
     - name: Setup SQLServer
       run: |
        sqllocaldb start MSSQLLocalDB
-       sqllocaldb info MSSQLLocalDB     
+       sqllocaldb info MSSQLLocalDB            
        
-       
-    - name: display current dir
-      run: dir
+    #- name: display current dir
+    #  run: dir
        
     - name: try publish dacpac
-      run: |
-       ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
+      run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
       shell: cmd      
        
     #- name: MSSQLLocalDB info

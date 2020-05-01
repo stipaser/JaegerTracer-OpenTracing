@@ -26,8 +26,7 @@ jobs:
     # C:\Program Files\Docker
     - name: MSSQLLocalDB 
       run: |
-       sqllocaldb i MSSQLLocalDB
-           
+       sqllocaldb i           
     
     - name: switch docker
       run: |

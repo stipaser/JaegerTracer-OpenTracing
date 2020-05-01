@@ -12,6 +12,10 @@ jobs:
   # This workflow contains a single job called "build"
   build:    
     runs-on: windows-latest
+    
+    env:
+      SQLPACKAGE_PATH: |
+       "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,7 +43,7 @@ jobs:
        
     - name: try publish dacpac
       run: |
-       "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage" /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
+       ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
       shell: cmd      
        
     #- name: MSSQLLocalDB info

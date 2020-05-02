@@ -50,6 +50,9 @@ jobs:
     - name: dispaly choco logs
       run: more C:\ProgramData\chocolatey\logs\chocolatey.log
     
+    - name: try run command test
+      run: nunit3-console.exe myfile.dll
+    
     
        
     #- name: MSSQLLocalDB info

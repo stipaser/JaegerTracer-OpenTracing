@@ -32,17 +32,17 @@ jobs:
     #- name: display sqlpackage
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
       
-    - name: Setup SQLServer
-      run: |
-       sqllocaldb start MSSQLLocalDB
-       sqllocaldb info MSSQLLocalDB            
+   # - name: Setup SQLServer
+   #   run: |
+   #    sqllocaldb start MSSQLLocalDB
+   #    sqllocaldb info MSSQLLocalDB            
        
     #- name: display current dir
     #  run: dir
        
-    - name: try publish dacpac
-      run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
-      shell: cmd   
+    #- name: try publish dacpac
+    #  run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
+    #  shell: cmd   
 
     - name: Setup Nunit console
       run: choco install nunit-console-runner

@@ -48,7 +48,7 @@ jobs:
       run: choco install nunit-console-runner
     
     - name: dispaly choco logs
-      run: echo C:\ProgramData\chocolatey\logs\chocolatey.log
+      run: more C:\ProgramData\chocolatey\logs\chocolatey.log
     
     
        

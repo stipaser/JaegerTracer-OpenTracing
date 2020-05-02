@@ -46,6 +46,11 @@ jobs:
 
     - name: Setup Nunit console
       run: choco install nunit-console-runner
+    
+    - name: dispaly choco logs
+      run: echo C:\ProgramData\chocolatey\logs\chocolatey.log
+    
+    
        
     #- name: MSSQLLocalDB info
     #  run: sqllocaldb info MSSQLLocalDB        
@@ -64,8 +69,8 @@ jobs:
     #- name: msbuild version
     #  run: msbuild -version
       
-    - name: GITHUB_WORKSPACE
-      run: echo $Env:GITHUB_WORKSPACE
+    #- name: GITHUB_WORKSPACE
+    #  run: echo $Env:GITHUB_WORKSPACE
     
     #- name: Setup Nuget.exe
     #  uses: warrenbuckley/Setup-Nuget@v1
@@ -84,8 +89,4 @@ jobs:
     #  with:        
     #    name: published_app        
     #    path: OpenTracingProj\bin\Release
-  test:
-    runs-on: windows-2019
-    steps:
-     - name: setup test
-       run: abfg
+  

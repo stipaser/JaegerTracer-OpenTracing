@@ -41,15 +41,12 @@ jobs:
     #  run: dir
     
     - name: echo env path
-      run: echo $env:path
+      run: echo $env:path   
     
-    - name: 130\DTS\Binn\
-      run: dir 'C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\'
     
-    - name: set sqlpackage path Test2
-      run: |
-        $sqlpackagepath = split-path -path ( vswhere -find **\\SQLDB\\**\\13*\\SqlPackage.exe" | select-object -first 1 )
-        echo $sqlpackagepath
+    - name: set sqlpackage path Test3
+      run: split-path -path ( vswhere -find **\\SQLDB\\**\\13*\\SqlPackage.exe" | select-object -first 1 )
+    #    echo $sqlpackagepath
     #    $env:path += -join(";", $sqlpackagepath)
         
     - name: try publish dacpac

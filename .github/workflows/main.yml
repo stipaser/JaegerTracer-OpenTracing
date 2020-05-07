@@ -13,8 +13,8 @@ jobs:
   build:    
     runs-on: windows-latest
     
-  #env:
-  #    SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
+    env:
+      SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
     
     #  "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\Extensions\\Microsoft\\SQLDB\\DAC\\130\\sqlpackage\""
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -38,27 +38,15 @@ jobs:
    #    sqllocaldb info MSSQLLocalDB            
        
     #- name: display current dir
-    #  run: dir
-    
-    - name: setup-sqlpackage
-      uses: coreywebber/setup-sqlpackage@v1.0.0
-      with:
-         vswhere-path: "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\"      
-         sql-version: 13
+    #  run: dir       
     
     - name: echo env path
-      run: echo $env:path    
-    
-    
-    #   $env:path += -join(";", $sqlpackagepath)
-        
-    - name: try publish dacpac
-      run: sqlpackage /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
-      
+      run: echo $env:path  
+         
        
-    #- name: try publish dacpac
-    #  run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
-    #  shell: cmd   
+    - name: try publish dacpac
+      run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
+      shell: cmd
 
     - name: Setup Nunit console
       run: choco install nunit-console-runner

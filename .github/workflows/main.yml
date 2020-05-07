@@ -25,14 +25,15 @@ jobs:
     - name: install MSBuild 2017
       run: choco install visualstudio2017buildtools
     
-    - name: Setup MSBuild.exe
-      uses: warrenbuckley/Setup-MSBuild@v1
-      with:
-        vs-version: 15
-    
+    - name: dispaly choco logs
+      run: more C:\ProgramData\chocolatey\logs\chocolatey.log    
+     
     - name: msbuild version
       run: msbuild -version
       
+    - name: Build and Publish Project
+      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
     # C:\Program Files\Docker
@@ -60,8 +61,7 @@ jobs:
     #- name: Setup Nunit console
     #  run: choco install nunit-console-runner
     
-    #- name: dispaly choco logs
-    #  run: more C:\ProgramData\chocolatey\logs\chocolatey.log
+    
     
     #- name: try run command test
     #  run: nunit3-console.exe myfile.dll

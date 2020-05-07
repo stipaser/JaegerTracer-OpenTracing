@@ -13,8 +13,8 @@ jobs:
   build:    
     runs-on: windows-latest
     
-    env:
-      SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
+  #env:
+  #    SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
     
     #  "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\Extensions\\Microsoft\\SQLDB\\DAC\\130\\sqlpackage\""
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -39,6 +39,15 @@ jobs:
        
     #- name: display current dir
     #  run: dir
+    
+    - name: set sqlpackage path Test1
+      run: |
+        $sqlpackagepath = split-path -path ( vswhere -find '**\\SQLDB\\**\\13*\\SqlPackage.exe"' | select-object -first 1 )
+        $env:path += -join(";", $sqlpackagepath)
+        
+    - name: try publish dacpac
+      run: sqlpackage /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"
+      
        
     #- name: try publish dacpac
     #  run: ${{ env.SQLPACKAGE_PATH }} /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"

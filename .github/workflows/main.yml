@@ -44,9 +44,10 @@ jobs:
       run: echo $env:path   
     
     
-    - name: set sqlpackage path Test3
-      run: split-path -path ( vswhere -find **\\SQLDB\\**\\13*\\SqlPackage.exe" | select-object -first 1 )
-    #    echo $sqlpackagepath
+    - name: set sqlpackage path Test4
+      run: |
+       $sqlpackagepath = split-path -path ( & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -find **\\SQLDB\\**\\13*\\SqlPackage.exe | select-object -first 1 )
+       echo $sqlpackagepath
     #    $env:path += -join(";", $sqlpackagepath)
         
     - name: try publish dacpac

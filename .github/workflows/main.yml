@@ -40,6 +40,12 @@ jobs:
     #- name: display current dir
     #  run: dir
     
+    - name: echo env path
+      run: echo $env:path
+    
+    - name: vswhere
+      run: vswhere version
+    
     - name: set sqlpackage path Test2
       run: |
         $sqlpackagepath = split-path -path ( vswhere -find **\\SQLDB\\**\\13*\\SqlPackage.exe" | select-object -first 1 )

@@ -25,14 +25,19 @@ jobs:
     - name: install MSBuild 2017
       run: choco install visualstudio2017buildtools
     
-    - name: dispaly choco logs
-      run: more C:\ProgramData\chocolatey\logs\chocolatey.log    
+    - name: dispaly BuildTools 2017
+      run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools'  
+    
+    - name: dispaly BuildTools - MSBuild 2017
+      run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild'
      
     - name: msbuild version
-      run: msbuild -version
+      run: |
+       & 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe' -version
       
     - name: Build and Publish Project
-      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      run: |
+       & 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe' OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"

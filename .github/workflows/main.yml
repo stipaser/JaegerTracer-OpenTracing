@@ -40,15 +40,17 @@ jobs:
     #- name: display current dir
     #  run: dir
     
+    - name: setup-sqlpackage
+      uses: coreywebber/setup-sqlpackage@v1.0.0
+      with:
+         vswhere-path: '"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"'          
+         sql-version: 13
+    
     - name: echo env path
-      run: echo $env:path   
+      run: echo $env:path    
     
     
-    - name: set sqlpackage path Test4
-      run: |
-       $sqlpackagepath = split-path -path ( & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -find **\\SQLDB\\**\\13*\\SqlPackage.exe | select-object -first 1 )
-       echo $sqlpackagepath
-    #    $env:path += -join(";", $sqlpackagepath)
+    #   $env:path += -join(";", $sqlpackagepath)
         
     - name: try publish dacpac
       run: sqlpackage /Action:Publish /SourceFile:ProScheduler.dacpac /TargetConnectionString:"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ProScheduler;Integrated Security=true;"

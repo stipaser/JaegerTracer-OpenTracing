@@ -43,7 +43,7 @@ jobs:
     - name: setup-sqlpackage
       uses: coreywebber/setup-sqlpackage@v1.0.0
       with:
-         vswhere-path: "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe"        
+         vswhere-path: "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\"      
          sql-version: 13
     
     - name: echo env path

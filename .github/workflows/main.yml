@@ -28,6 +28,12 @@ jobs:
     - name: install MSBuild 2017
       run: choco install visualstudio2017buildtools
     
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    
+    - name: Restore NuGet Packages
+      run: nuget restore OpenTracingProj.sln
+    
     - name: dispaly BuildTools 2017
       run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools'  
     

@@ -38,10 +38,19 @@ jobs:
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
-    - name: github-action-publish-binaries
-      uses: skx/github-action-publish-binaries@release-1.3
-      with:
-       args: 'versio-my-123'
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:        
+        name: published_app        
+        path: OpenTracingProj\bin\Release
+    
+    - name: display repo and release Id
+      run: |
+        echo ${{ github.repository }}
+        echo $(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
+      shell: bash      
+    
+   
     
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"

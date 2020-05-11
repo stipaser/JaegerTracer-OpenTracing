@@ -44,7 +44,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:        
-        name: published_app        
+        name: published_app_zip        
         path: OpenTracingProj\bin\Release
     
     - name: File
@@ -53,7 +53,7 @@ jobs:
     
     - name: display repo and release Id
       run: |
-       AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}
+       AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
        RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")
        echo ${RELEASE_ID}     
        # FILENAME=$(basename "${file}")
@@ -69,8 +69,8 @@ jobs:
     #- name: display sqlpackage
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
        
-    #- name: display current dir
-    #  run: dir       
+    - name: display current dir
+      run: dir       
     
     #- name: echo env path
     #  run: echo $env:path  

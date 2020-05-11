@@ -54,12 +54,18 @@ jobs:
     - name: display repo and release Id
       run: |
        AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
-       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")
-       echo ${RELEASE_ID}     
+       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
        # FILENAME=$(basename "${file}")
-       UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=${FILENAME}"
-       echo "Upload URL is ${UPLOAD_URL}"          
-      shell: bash    
+       UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=cedr.dacpac"
+       echo "Upload URL is ${UPLOAD_URL}"                
+      shell: bash
+    
+    - name: display ReleaseID and Uplod file
+      run: |
+        echo ${RELEASE_ID}
+        echo ${UPLOAD_URL}
+        shell: bash
+        
    
     
     #- name: setup-sqlpackage path

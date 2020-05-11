@@ -57,14 +57,17 @@ jobs:
        RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
        # FILENAME=$(basename "${file}")
        UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=cedr.dacpac"
-       echo "Upload URL is ${UPLOAD_URL}"                
+       echo "Upload URL is ${UPLOAD_URL}"
+       curl \
+        -sSL \
+        -XPOST \
+        -H "${AUTH_HEADER}" \
+        --upload-file cedr.dacpac \
+        --header "Content-Type:application/octet-stream" \        
+        "${UPLOAD_URL}"       
       shell: bash
     
-    - name: display ReleaseID and Uplod file
-      run: |
-        echo ${RELEASE_ID}
-        echo ${UPLOAD_URL}
-        shell: bash
+   
         
    
     

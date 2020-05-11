@@ -48,18 +48,15 @@ jobs:
         path: OpenTracingProj\bin\Release
     
     - name: File
-      run: |
-        for file in $*; do
-            echo "Processing file ${file}"
-        done       
-      #echo $(basename "${file}")
+      run: bash test.sh
       shell: bash
     
     - name: display repo and release Id
       run: |
        AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}
-       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
-       FILENAME=$(basename "${file}")
+       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")
+       echo ${RELEASE_ID}     
+       # FILENAME=$(basename "${file}")
        UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=${FILENAME}"
        echo "Upload URL is ${UPLOAD_URL}"          
       shell: bash    

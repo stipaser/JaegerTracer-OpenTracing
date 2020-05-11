@@ -21,32 +21,25 @@ jobs:
     
     #  "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\Extensions\\Microsoft\\SQLDB\\DAC\\130\\sqlpackage\""
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
+    steps:   
     - uses: actions/checkout@v2      
     
-    - name: install MSBuild 2017
-      run: choco install visualstudio2017buildtools
+    #- name: install MSBuild 2017
+    #  run: choco install visualstudio2017buildtools
+    #- name: dispaly BuildTools 2017
+    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools'  
     
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     
     - name: Restore NuGet Packages
-      run: nuget restore OpenTracingProj.sln
+      run: nuget restore OpenTracingProj.sln   
     
-    - name: dispaly BuildTools 2017
-      run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools'  
-    
-    - name: dispaly BuildTools - MSBuild 2017
-      run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild'
-     
-    - name: msbuild version
-      run: |
-       & 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe' -version
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
       
     - name: Build and Publish Project
-      run: |
-       & 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe' OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
     #- name: setup-sqlpackage path
     #  run:  $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150"
@@ -54,14 +47,12 @@ jobs:
     
     #- name: display sqlpackage
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
-      
-               
        
     #- name: display current dir
     #  run: dir       
     
-    - name: echo env path
-      run: echo $env:path  
+    #- name: echo env path
+    #  run: echo $env:path  
          
     #- name: Setup SQLServer
     #  run: |
@@ -75,12 +66,9 @@ jobs:
     #- name: Setup Nunit console
     #  run: choco install nunit-console-runner
     
-    
-    
     #- name: try run command test
     #  run: nunit3-console.exe myfile.dll
-    
-    
+        
        
     #- name: MSSQLLocalDB info
     #  run: sqllocaldb info MSSQLLocalDB        

@@ -50,9 +50,9 @@ jobs:
     - name: File
       run: |
         for file in $*; do
-           echo "Processing file ${file}"
+            echo "Processing file ${file}"
         fi
-        echo $(basename "${file}")
+        //echo $(basename "${file}")
       shell: bash
     
     - name: display repo and release Id

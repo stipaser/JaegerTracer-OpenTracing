@@ -50,8 +50,7 @@ jobs:
     - name: File
       run: |
         for file in $*; do
-            echo "Processing file ${file}"
-        fi
+            echo "Processing file ${file}"        
       #echo $(basename "${file}")
       shell: bash
     

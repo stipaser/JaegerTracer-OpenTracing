@@ -6,6 +6,9 @@ name: test-actions
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - github-actions
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -13,8 +16,8 @@ jobs:
   build:    
     runs-on: windows-latest
     
-    env:
-      SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
+    #env:
+    #  SQLPACKAGE_PATH: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130\sqlpackage"'
     
     #  "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\Extensions\\Microsoft\\SQLDB\\DAC\\130\\sqlpackage\""
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -44,12 +47,22 @@ jobs:
         name: published_app        
         path: OpenTracingProj\bin\Release
     
+    - name: File
+      run: |
+        for file in $*; do
+           echo "Processing file ${file}"
+        fi
+        echo $(basename "${file}")
+      shell: bash
+    
     - name: display repo and release Id
       run: |
-        echo ${{ github.repository }}
-        echo $(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
-      shell: bash      
-    
+       AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}
+       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
+       FILENAME=$(basename "${file}")
+       UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=${FILENAME}"
+       echo "Upload URL is ${UPLOAD_URL}"          
+      shell: bash    
    
     
     #- name: setup-sqlpackage path

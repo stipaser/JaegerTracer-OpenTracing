@@ -49,7 +49,7 @@ jobs:
     
     - name: File
       run: |
-        for 'published_app' in $*; do
+        for file in $*; do
             echo "Processing file ${file}"
         done       
       #echo $(basename "${file}")

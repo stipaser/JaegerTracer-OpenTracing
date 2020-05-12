@@ -31,17 +31,7 @@ jobs:
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
-    - name: install 7zip command line
-      run: choco install 7zip.portable
-    
-    - name: display current dir
-      run: dir
-    
-    - name: zip
-      run: 7za a -t7z files.7z cedr.dacpac
-    
-    - name: display current dir
-      run: dir
+       
     
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
@@ -55,11 +45,20 @@ jobs:
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:        
-        name: published_app_zip        
-        path: OpenTracingProj\bin\Release
+    - name: Install 7zip command line
+      run: choco install 7zip.portable 
+      
+    - name: zip the release
+      run: 7za a release.zip OpenTracingProj\bin\Release
+    
+    - name: display current dir
+      run: dir
+    
+    #- name: Upload artifact
+    #  uses: actions/upload-artifact@v1.0.0
+    #  with:        
+    #    name: published_app_zip        
+    #    path: OpenTracingProj\bin\Release
     
     #- name: File
     #  run: bash test.sh
@@ -86,8 +85,8 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: cedr.dacpac
-        asset_name: cedr_dacpac
+        file: release.zip
+        asset_name: release_new
         tag: ${{ github.ref }}
         overwrite: true
         
@@ -98,10 +97,8 @@ jobs:
     # C:\Program Files\Docker
     
     #- name: display sqlpackage
-    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'
+    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\'       
        
-    - name: display current dir
-      run: dir       
     
     #- name: echo env path
     #  run: echo $env:path  

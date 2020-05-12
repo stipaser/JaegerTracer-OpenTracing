@@ -31,12 +31,7 @@ jobs:
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
-    - name: dispplay 7zip
-      run: 7z a test.zip cedr.dacpac
-    
-    - name: display current dir
-      run: dir
-    
+      
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     
@@ -49,13 +44,13 @@ jobs:
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
-    - name: Install 7zip command line
-      run: choco install 7zip.portable 
+    #- name: Install 7zip command line
+    #  run: choco install 7zip.portable 
       
     - name: zip the release
       run: |
         cd OpenTracingProj\bin\Release\
-        7za a release.zip *.*
+        7z a release.zip *.*
     
     - name: display current dir
       run: dir 'OpenTracingProj\bin\Release\*.zip'
@@ -86,6 +81,8 @@ jobs:
     #    "${UPLOAD_URL}"       
     #  shell: bash
     
+    - name: display tag
+      run: echo ${{ github.ref }}
    
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release

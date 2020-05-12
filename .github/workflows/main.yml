@@ -30,8 +30,12 @@ jobs:
     #  run: choco install visualstudio2017buildtools
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
+    
     - name: dispplay 7zip
-      run: dir 'C:\Program Files\Azure Cosmos DB Emulator\'      
+      run: 7za a test.zip cedr.dacpac
+    
+    - name: display current dir
+      run: dir
     
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
@@ -54,7 +58,7 @@ jobs:
         7za a release.zip *.*
     
     - name: display current dir
-      run: dir
+      run: dir 'OpenTracingProj\bin\Release\*.zip'
     
     #- name: Upload artifact
     #  uses: actions/upload-artifact@v1.0.0
@@ -87,7 +91,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: release.zip
+        file: OpenTracingProj\bin\Release\release.zip
         asset_name: release_new.zip
         tag: ${{ github.ref }}
         overwrite: true

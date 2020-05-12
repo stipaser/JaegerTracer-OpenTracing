@@ -7,7 +7,8 @@ on:
     tags:
       - 'ver-*'
 
-  build:    
+jobs:
+  build_release:    
     runs-on: windows-latest   
     
     steps:   

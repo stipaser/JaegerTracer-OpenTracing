@@ -7,8 +7,8 @@ on:
   #release:
   #  types: [created]
   push:
-    #branches:
-    #  - github-actions
+    branches:
+      - github-actions
     tags:
       - 'ver-*'
 
@@ -29,7 +29,11 @@ jobs:
     #- name: install MSBuild 2017
     #  run: choco install visualstudio2017buildtools
     #- name: dispaly BuildTools 2017
-    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools'  
+    #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
+    
+    - name: check zip
+      run: zip -r cedr.zip cedr.dacpac
+      shell: bash
     
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

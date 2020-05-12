@@ -12,10 +12,10 @@ jobs:
     steps:   
     - uses: actions/checkout@v2  
     
-    - name: display release tag
+    - name: Add version env from tag
       run: |
-       $version = "${{ github.ref }}".split('/')[-1]
-       echo $version      
+       $version = "${{ github.ref }}".split("/")[-1]
+       echo ::set-env name=RELEASE_VERSION::$version     
           
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
@@ -29,10 +29,10 @@ jobs:
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
              
-    - name: zip the release
+    - name: Package release folder
       run: |
         cd OpenTracingProj\bin\Release\
-        7z a release.zip *.*
+        7z a artifacts.zip *.*
     
     - name: display current dir
       run: dir 'OpenTracingProj\bin\Release\*.zip'
@@ -47,8 +47,8 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: OpenTracingProj\bin\Release\release.zip
-        asset_name: release_new.zip
+        file: OpenTracingProj\bin\Release\artifacts.zip
+        asset_name: release_${{ env.RELEASE_VERSION }}.zip
         tag: ${{ github.ref }}
         overwrite: true
         

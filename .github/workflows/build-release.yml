@@ -15,7 +15,7 @@ jobs:
     - name: Add version env from tag
       run: |
        $version = "${{ github.ref }}".split("/")[-1]
-       echo ::set-env name=RELEASE_VERSION::$version     
+       echo '::set-env name=RELEASE_VERSION::$version'   
           
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

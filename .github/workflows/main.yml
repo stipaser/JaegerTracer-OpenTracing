@@ -29,8 +29,8 @@ jobs:
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
-    - name: display event
-      run: echo ${{ github.event_path }}
+    - name: display jq event
+      run: jq '.' ${{ github.event }}
       
     #- name: Setup Nuget.exe
     #  uses: warrenbuckley/Setup-Nuget@v1

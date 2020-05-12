@@ -1,8 +1,6 @@
 name: build-release
 
-on:
-  release:
-    types: [created]
+on:  
   push:    
     tags:
       - 'ver-*'
@@ -14,8 +12,8 @@ jobs:
     steps:   
     - uses: actions/checkout@v2  
     
-    - name: display jq raw output
-      run: jq --raw-output '.' ${{github.event_path}}
+    - name: display release tag
+      run: echo ${GITHUB_REF}.split('/')[-1]
           
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

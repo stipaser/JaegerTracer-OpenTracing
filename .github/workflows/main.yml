@@ -31,12 +31,17 @@ jobs:
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
-    - name: check zip
-      run: |
-       apt-get update && apt-get install -y zip
-       apt-get clean -y
-       zip -r cedr.zip cedr.dacpac
-      shell: bash
+    - name: install 7zip command line
+      run: choco install 7zip.portable
+    
+    - name: display current dir
+      run: dir
+    
+    - name: zip
+      run: 7za a -t7z files.7z cedr.dacpac
+    
+    - name: display current dir
+      run: dir
     
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

@@ -74,7 +74,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/Release/cedr.zip
+        file: cedr.dacpac
         asset_name: cedr_dacpac
         tag: ${{ github.ref }}
         overwrite: true

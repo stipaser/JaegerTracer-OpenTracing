@@ -4,11 +4,13 @@ name: test-actions
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  release:
-    types: [created]
+  #release:
+  #  types: [created]
   push:
     branches:
       - github-actions
+    tags:
+      - 'ver-*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -47,27 +49,35 @@ jobs:
         name: published_app_zip        
         path: OpenTracingProj\bin\Release
     
-    - name: File
-      run: bash test.sh
-      shell: bash
+    #- name: File
+    #  run: bash test.sh
+    #  shell: bash
     
-    - name: display repo and release Id
-      run: |
-       AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
-       RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
-       # FILENAME=$(basename "${file}")
-       UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=cedr.dacpac"
-       echo "Upload URL is ${UPLOAD_URL}"
-       curl \
-        -sSL \
-        -XPOST \
-        -H "${AUTH_HEADER}" \
-        --upload-file cedr.dacpac \
-        --header "Content-Type:application/octet-stream" \        
-        "${UPLOAD_URL}"       
-      shell: bash
+    #- name: display repo and release Id
+    #  run: |
+    #   AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
+    #   RELEASE_ID=$(jq --raw-output '.release.id' "$GITHUB_EVENT_PATH")        
+    #   # FILENAME=$(basename "${file}")
+    #   UPLOAD_URL="https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets?name=cedr.dacpac"
+    #   echo "Upload URL is ${UPLOAD_URL}"
+    #   curl \
+    #   -sSL \
+    #    -XPOST \
+    #    -H "${AUTH_HEADER}" \
+    #    --upload-file cedr.dacpac \
+    #    --header "Content-Type:application/octet-stream" \        
+    #    "${UPLOAD_URL}"       
+    #  shell: bash
     
    
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: cedr.dacpac
+        asset_name: cedr_dacpac
+        tag: ${{ github.ref }}
+        overwrite: true
         
    
     

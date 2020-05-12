@@ -31,29 +31,29 @@ jobs:
     #- name: dispaly BuildTools 2017
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
+    - name: display tag
+      run: echo $GITHUB_EVENT_PATH
       
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+    #- name: Setup Nuget.exe
+    #  uses: warrenbuckley/Setup-Nuget@v1
     
-    - name: Restore NuGet Packages
-      run: nuget restore OpenTracingProj.sln   
+    #- name: Restore NuGet Packages
+    #  run: nuget restore OpenTracingProj.sln   
     
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
+    #- name: setup-msbuild
+    #  uses: microsoft/setup-msbuild@v1
       
-    - name: Build and Publish Project
-      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    #- name: Build and Publish Project
+    #  run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
     #- name: Install 7zip command line
     #  run: choco install 7zip.portable 
       
-    - name: zip the release
-      run: |
-        cd OpenTracingProj\bin\Release\
-        7z a release.zip *.*
+    #- name: zip the release
+    #  run: |
+    #    cd OpenTracingProj\bin\Release\
+    #    7z a release.zip *.* 
     
-    - name: display current dir
-      run: dir 'OpenTracingProj\bin\Release\*.zip'
     
     #- name: Upload artifact
     #  uses: actions/upload-artifact@v1.0.0
@@ -81,17 +81,15 @@ jobs:
     #    "${UPLOAD_URL}"       
     #  shell: bash
     
-    - name: display tag
-      run: echo ${{ github.ref }}
-   
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v1-release
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: OpenTracingProj\bin\Release\release.zip
-        asset_name: release_new.zip
-        tag: ${{ github.ref }}
-        overwrite: true
+       
+   # - name: Upload binaries to release
+   #   uses: svenstaro/upload-release-action@v1-release
+   #   with:
+   #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+   #     file: OpenTracingProj\bin\Release\release.zip
+   #     asset_name: release_new.zip
+   #     tag: ${{ github.ref }}
+   #     overwrite: true
         
    
     

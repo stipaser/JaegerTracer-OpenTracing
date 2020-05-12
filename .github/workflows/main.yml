@@ -32,7 +32,7 @@ jobs:
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
     - name: dispplay 7zip
-      run: 7za a test.zip cedr.dacpac
+      run: 7z a test.zip cedr.dacpac
     
     - name: display current dir
       run: dir

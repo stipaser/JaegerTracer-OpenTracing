@@ -32,7 +32,10 @@ jobs:
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
     - name: check zip
-      run: zip -r cedr.zip cedr.dacpac
+      run: |
+       apt-get update && apt-get install -y zip
+       apt-get clean -y
+       zip -r cedr.zip cedr.dacpac
       shell: bash
     
     - name: Setup Nuget.exe

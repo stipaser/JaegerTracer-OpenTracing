@@ -8,14 +8,12 @@ on:
   #  types: [created]
   push:
     branches:
-      - github-actions
-    tags:
-      - 'ver-*'
+      - github-actions    
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:    
+  build_branch:    
     runs-on: windows-latest
     
     #env:

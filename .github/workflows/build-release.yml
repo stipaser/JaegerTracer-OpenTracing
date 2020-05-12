@@ -12,7 +12,10 @@ jobs:
     runs-on: windows-latest   
     
     steps:   
-    - uses: actions/checkout@v2     
+    - uses: actions/checkout@v2  
+    
+    - name: display jq raw output
+      run: jq --raw-output '.' ${{github.event_path}}
           
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

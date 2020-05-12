@@ -30,7 +30,7 @@ jobs:
     #  run: dir 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' 
     
     - name: display jq event
-      run: jq '.' ${{ github.event_path }}
+      run: echo basename ${{ github.ref }}
       
     #- name: Setup Nuget.exe
     #  uses: warrenbuckley/Setup-Nuget@v1

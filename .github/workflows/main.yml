@@ -44,8 +44,8 @@ jobs:
           
     - name: zip the release
       run: |
-        7z a release.zip "OpenTracingProj\bin\Release\*" ,
-        "CEDR.dacpac" ,
+        7z a release.zip "OpenTracingProj\bin\Release\*" `
+        "CEDR.dacpac" `
         "ProScheduler.dacpac"
      
     - name: zip list

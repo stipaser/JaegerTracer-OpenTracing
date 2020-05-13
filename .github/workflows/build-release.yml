@@ -47,7 +47,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: OpenTracingProj\bin\Release\artifacts.zip
+        file: OpenTracingProj\bin\artifacts.zip
         asset_name: release_${{ env.RELEASE_VERSION }}.zip
         tag: ${{ github.ref }}
         overwrite: true

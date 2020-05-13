@@ -31,8 +31,8 @@ jobs:
              
     - name: Package release folder
       run: |
-        cd OpenTracingProj\bin\Release\
-        7z a artifacts.zip *.*
+        cd OpenTracingProj\bin\
+        7z a artifacts.zip Release\
     
     - name: display current dir
       run: dir 'OpenTracingProj\bin\Release\*.zip'

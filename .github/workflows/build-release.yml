@@ -31,8 +31,8 @@ jobs:
              
     - name: Package release folder
       run: |
-        cd OpenTracingProj\bin\
-        7z a artifacts.zip Release\
+        cd OpenTracingProj\bin\Release\
+        7z a artifacts.zip *
     
     - name: display current dir
       run: dir 'OpenTracingProj\bin\Release\*.zip'
@@ -47,7 +47,7 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: OpenTracingProj\bin\artifacts.zip
+        file: OpenTracingProj\bin\Release\artifacts.zip
         asset_name: release_${{ env.RELEASE_VERSION }}.zip
         tag: ${{ github.ref }}
         overwrite: true

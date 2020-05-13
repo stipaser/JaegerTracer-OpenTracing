@@ -47,17 +47,17 @@ jobs:
     #- name: Install 7zip command line
     #  run: choco install 7zip.portable 
       
-    #- name: zip the release
-    #  run: |
-    #    cd OpenTracingProj\bin\Release\
-    #    7z a release.zip *.* 
+    - name: zip the release
+      run: |
+        7z a release.zip "OpenTracingProj\bin\Release\*" 
+        "CEDR.dacpac"
     
     
-    #- name: Upload artifact
-    #  uses: actions/upload-artifact@v1.0.0
-    #  with:        
-    #    name: published_app_zip        
-    #    path: OpenTracingProj\bin\Release
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:        
+        name: published_app_zip        
+        path: release.zip
     
     #- name: File
     #  run: bash test.sh

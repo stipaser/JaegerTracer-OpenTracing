@@ -14,6 +14,7 @@ namespace OpenTracingProj
          Tracer.Instance.ScopeManager.Active?.Dispose();
 
          var spans = Tracer.GetInMemorySpans();
+         var a = what;
       }
 
 

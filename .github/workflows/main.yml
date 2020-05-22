@@ -24,6 +24,9 @@ jobs:
 
     - name: Dispaly branch
       run: git branch
+    
+    - name: Display github_ref
+      run: echo $GITHUB_REF
       
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1

@@ -22,7 +22,7 @@ namespace OpenTracingProj
          using(IScope scop = Tracer.Instance.BuildSpan("method_2").WithTag("employees", 25).StartActive(true))
          {
             Thread.Sleep(2000);
-            // comment
+            
             SomeMethod2();
          }        
       }

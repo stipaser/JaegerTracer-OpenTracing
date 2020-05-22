@@ -11,6 +11,7 @@ namespace OpenTracingProj
 {
    public class Tracer
    {
+      // add comment
       private static ITracer _tracer;
       private static InMemoryReporter _inMemoryReporter;
 

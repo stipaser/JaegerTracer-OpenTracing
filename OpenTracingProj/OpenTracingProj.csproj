@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="proscheduler.dacpac" />
+    <None Include="Database\proscheduler.dacpac" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jaeger">
@@ -62,5 +62,6 @@
   <ItemGroup>
     <Content Include="UpdateScript.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

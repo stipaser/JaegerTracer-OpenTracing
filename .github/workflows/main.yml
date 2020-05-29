@@ -41,3 +41,10 @@ jobs:
       
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:        
+        name: ProjectFiles        
+        path: OpenTracingProj/UpdateScript.sql
+    

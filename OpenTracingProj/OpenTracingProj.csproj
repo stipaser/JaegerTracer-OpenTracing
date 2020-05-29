@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="proscheduler.dacpac" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jaeger">
@@ -57,6 +58,9 @@
     <PackageReference Include="OpenTracing">
       <Version>0.12.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdateScript.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

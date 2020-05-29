@@ -24,23 +24,23 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Dispaly branch
-      run: git branch
+    #- name: Dispaly branch
+    #  run: git branch
     
-    - name: Display github_ref
-      run: echo ${{ github.ref }}
+    #- name: Display github_ref
+    #  run: echo ${{ github.ref }}
       
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+    #- name: Setup Nuget.exe
+    #  uses: warrenbuckley/Setup-Nuget@v1
     
-    - name: Restore NuGet Packages
-      run: nuget restore OpenTracingProj.sln   
+    #- name: Restore NuGet Packages
+    #  run: nuget restore OpenTracingProj.sln   
     
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
+    #- name: setup-msbuild
+    #  uses: microsoft/setup-msbuild@v1
       
-    - name: Build and Publish Project
-      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    #- name: Build and Publish Project
+    #  run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
     - name: Mkdir and Copy files
       run: |
@@ -65,12 +65,11 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2
       with: 
-        name: ProjectFiles
-        # Destination path
-        #path: # optional
+        name: ProjectFiles        
+        path: OpenTracingProj/Download
           
     - name: Display folder
-      run: dir
+      run: dir OpenTracingProj/Download
     
     
       

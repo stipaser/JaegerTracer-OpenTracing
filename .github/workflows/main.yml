@@ -48,3 +48,33 @@ jobs:
         name: ProjectFiles        
         path: OpenTracingProj/UpdateScript.sql
     
+  build2:
+    runs-on: windows-latest
+
+    steps: 
+    - uses: actions/checkout@v2
+
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    
+    - name: Restore NuGet Packages
+      run: nuget restore OpenTracingProj.sln   
+    
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+      
+    - name: Build and Publish Project
+      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2
+      with: 
+        name: ProjectFiles
+        # Destination path
+        #path: # optional
+          
+    - name: Display folder
+      run: dir
+    
+    
+      

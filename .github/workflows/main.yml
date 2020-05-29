@@ -41,30 +41,26 @@ jobs:
       
     - name: Build and Publish Project
       run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+
+    - name: Mkdir and Copy files
+      run: |
+       mkdir Artifacts
+       copy-item -path OpenTracingProj/Database/proscheduler.dacpac -destination Artifacts
+       copy-item -path OpenTracingProj/UpdateScript.sql -destination Artifacts
+
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:        
         name: ProjectFiles        
-        path: OpenTracingProj/UpdateScript.sql
+        path: Artifacts/
     
   build2:
+    needs: build
     runs-on: windows-latest
 
     steps: 
-    - uses: actions/checkout@v2
-
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    
-    - name: Restore NuGet Packages
-      run: nuget restore OpenTracingProj.sln   
-    
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
-      
-    - name: Build and Publish Project
-      run: msbuild OpenTracingProj.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    - uses: actions/checkout@v2   
       
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2
